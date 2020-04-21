@@ -17,6 +17,15 @@ namespace PoetlabApi.Data.Mappers
             builder.Property(p => p.Title).IsRequired().HasMaxLength(50);
             builder.Property(p => p.Author).IsRequired().HasMaxLength(50);
             builder.Property(p => p.PoemText).IsRequired();
+            builder.Property(p => p.Themes).HasConversion(
+                                                t => string.Join(',', t), 
+                                                t => t.Split(',' , StringSplitOptions.RemoveEmptyEntries));
+            builder.Property(p => p.DownVoters).HasConversion(
+                                                t => string.Join(',', t),
+                                                t => t.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList());
+            builder.Property(p => p.UpVoters).HasConversion(
+                                                t => string.Join(',', t),
+                                                t => t.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList());
         }
     }
 }

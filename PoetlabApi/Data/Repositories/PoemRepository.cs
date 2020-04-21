@@ -27,8 +27,8 @@ namespace PoetlabApi.Data.Repositories
             var poems = _poems.AsQueryable();
             if (!string.IsNullOrEmpty(author))
                 poems = poems.Where(p => p.Author.Equals(author, System.StringComparison.OrdinalIgnoreCase));
-            if (!string.IsNullOrEmpty(theme))
-                poems = poems.Where(p => p.Theme.Equals(theme, System.StringComparison.OrdinalIgnoreCase));
+            if (theme != null)
+                poems = poems.Where(p => p.Themes.Contains(theme, StringComparer.OrdinalIgnoreCase));
             return poems.OrderBy(p => p.Author).ToList();
         }
 
@@ -55,6 +55,12 @@ namespace PoetlabApi.Data.Repositories
         public void SaveChanges()
         {
             _context.SaveChanges();
+        }
+
+        public void RenameAuthorPoems(string oldAuthor, string newAuthor)
+        {
+           _context.Poems.Where(p => p.Author == oldAuthor).ToList().ForEach(p => p.Author = newAuthor);
+            SaveChanges();
         }
     }
 }

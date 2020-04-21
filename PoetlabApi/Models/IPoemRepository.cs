@@ -14,5 +14,6 @@ namespace PoetlabApi.Models
         void Delete(Poem poem);
         void Update(Poem poem);
         void SaveChanges();
+        void RenameAuthorPoems(string oldAuthor, string newAuthor);
     }
 }

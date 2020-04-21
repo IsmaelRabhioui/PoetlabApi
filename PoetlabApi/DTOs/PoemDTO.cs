@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PoetlabApi.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,8 +15,13 @@ namespace PoetlabApi.DTOs
         public string Author { get; set; }
         [Required]
         public string PoemText { get; set; }
-        
-        public string Theme { get; set; }
+        [Required]
+        public string[] Themes { get; set; }
+        public IList<String> UpVoters { get; set; }
+        public IList<String> DownVoters { get; set; }
+        public DateTime? Date { get; set; }
+        public int Upvotes { get; set; }
+        public int Downvotes { get; set; }
         public string Image { get; set; }
 
     }

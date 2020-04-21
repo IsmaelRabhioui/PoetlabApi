@@ -20,7 +20,11 @@ namespace PoetlabApi.Models
         [Required]
         public string PoemText { get; set; }
 
-        public string Theme { get; set; }
+        public string[] Themes { get; set; }
+
+        public IList<String> UpVoters { get; set; }
+
+        public IList<String> DownVoters { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -32,13 +36,8 @@ namespace PoetlabApi.Models
         #endregion
 
         #region Constructors
-        public Poem(string title, string author, string poemText, string theme = "No Theme", string image = "No Image")
+        public Poem()
         {
-            Title = title;
-            Author = author;
-            PoemText = poemText;
-            Theme = theme;
-            Image = image;
             Upvotes = 0;
             Downvotes = 0;
             Date = DateTime.Now;
@@ -52,7 +51,7 @@ namespace PoetlabApi.Models
 
         public void AddDownvote() => Downvotes++;
 
-        public void RemoveDownvote() => Downvotes++;
+        public void RemoveDownvote() => Downvotes--;
         #endregion
     }
 }
